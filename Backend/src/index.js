@@ -5,5 +5,5 @@ const app = express() ;
 
 app.use("/api/auth" , authRoutes)
 app.listen(5001 , () => {
-    console.log("serverr is runing  on port 5001")
+    console.log("serve is runing  on port 5001")
 });
