@@ -7,7 +7,7 @@ import User from "../models/user.model.js"
 
 export const protectRoute = async (req , res , next) => {
     try {
-        const token = req.cookie.jwt 
+        const token = req.cookies.jwt 
         //idhar jwt isiliye kyunki utils.js mein usko maine ye naam dia tha
         if(!token) {
             return res.status(401).json({message : "No Tokens provided bro"}) ;
@@ -28,6 +28,6 @@ export const protectRoute = async (req , res , next) => {
 
     } catch (error) {
         console.log("Some errorrr" , error.message) ;
-        res.status(500).json({message : "Internal server error"}) ;
+        res.status(500).json({message : "ProtectRoute Error"}) ;
     }
 }
