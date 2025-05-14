@@ -6,6 +6,7 @@ import { axiosInstance } from "../lib/axios";
 export const useAuthStore = create((set) => ({
     //The below are the few states of user
     authUser:null ,
+    //isSingingUp jo state hai will be true when user is signing up matlab ki jab wo form fill karke and submit karega tab ... aayega uske liye
     isSigningUp : false ,
     isLoggingIn : false , 
     isUpdatingProfile : false ,
@@ -19,9 +20,13 @@ export const useAuthStore = create((set) => ({
         } catch (error) {
             console.log("Error in checkAuth");
             
-            sessionStorage({authUser : null})
+            set({authUser : null})
         }finally {
             set({isCheckingAuth : false}) ;
         }
-    }
+    }, 
+
+    signup :async(data) => {
+        
+}
 }))
