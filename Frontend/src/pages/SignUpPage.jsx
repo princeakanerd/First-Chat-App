@@ -1,4 +1,4 @@
-import { Eye, EyeOff, Lock, Mail, MessageSquare, User } from 'lucide-react';
+import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare, User } from 'lucide-react';
 import React from 'react'
 import { useState } from 'react'
 import { useAuthStore } from '../store/useAuthStore';
