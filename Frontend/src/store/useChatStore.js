@@ -33,7 +33,6 @@ export const useChatStore = create((set, get) => ({
       set({ isMessagesLoading: false });
     }
   },
-
   sendMessage: async (messageData) => {
     const { selectedUser, messages } = get();
     try {
@@ -41,17 +40,9 @@ export const useChatStore = create((set, get) => ({
         `/messages/send/${selectedUser._id}`,
         messageData
       );
-      console.log("API Response:", res.data);
-
-      if (res && res.data) {
-        set({ messages: [...messages, res.data] });
-      } else {
-        console.error("API response or response data is undefined", response);
-      }
+      set({ messages: [...messages, res.data] });
     } catch (error) {
-      console.error("Error in sendMessage:", error);
       toast.error(error.response.data.message);
-      throw error;
     }
   },
 
@@ -60,10 +51,12 @@ export const useChatStore = create((set, get) => ({
     if (!selectedUser) return;
 
     const socket = useAuthStore.getState().socket;
-    const isMessageSentFromSelectedUser =
-      newMessage.senderId === selectedUser._id;
-    if (!isMessageSentFromSelectedUser) return;
+
     socket.on("newMessage", (newMessage) => {
+      const isMessageSentFromSelectedUser =
+        newMessage.senderId === selectedUser._id;
+      if (!isMessageSentFromSelectedUser) return;
+
       set({
         messages: [...get().messages, newMessage],
       });
